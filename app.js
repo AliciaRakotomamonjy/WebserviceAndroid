@@ -4,12 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var categorieRouter = require('./routes/categorie');
+var indexRouter = require('./routes/indexRoute');
+var usersRouter = require('./routes/usersRoute');
+var categorieRouter = require('./routes/categorieRoute');
+var deviceTokenRouter = require('./routes/deviceTokenRoute');
+var notificationRouter = require('./routes/notificationRoute');
 var app = express();
 require('./dbconnection/db');
-
+require('./notification/notificationAuth')
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,7 +21,8 @@ app.use(cookieParser());
 app.use('/api/', indexRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/categories', categorieRouter);
-
+app.use('/api/deviceTokens', deviceTokenRouter);
+app.use('/api/notifications', notificationRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -33,6 +36,5 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
 });
-
 
 module.exports = app;
