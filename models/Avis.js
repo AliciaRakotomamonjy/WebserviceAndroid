@@ -7,6 +7,8 @@ const avisSchema = new Schema({
   dateAvis: { type: Date, required: true, default: Date.now },
   utilisateur: { type: Schema.Types.ObjectId, ref: 'utilisateur', required: true },
   images: [{ type: String }],
-});
+},
+  { collection: 'avis' }
+);
 
 module.exports = mongoose.model('avis', avisSchema);
