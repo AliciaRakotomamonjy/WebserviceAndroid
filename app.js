@@ -12,7 +12,8 @@ var notificationRouter = require('./routes/notificationRoute');
 var articleRouter = require('./routes/articleRoute');
 var app = express();
 require('./dbconnection/db');
-require('./notification/notificationAuth')
+require('./notification/notificationAuth');
+app.disable('etag');
 app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
