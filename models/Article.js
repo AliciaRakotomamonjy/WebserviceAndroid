@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Avis = require('./Avis');
 
 
 const articleSchema = new Schema({
