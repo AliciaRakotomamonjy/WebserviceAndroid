@@ -18,6 +18,16 @@ const getArticles = async (idCateg) => {
     }
 }
 
+const getArticleById = async (idArticle) => {
+    try {
+        let article = await Article.findById(idArticle).populate('avis');
+        return article;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 const createArticle = async (data) => {
     try {
         const newArticle = new Article(data);
@@ -31,5 +41,6 @@ const createArticle = async (data) => {
 
 module.exports = {
     getArticles,
+    getArticleById,
     createArticle,
 }
