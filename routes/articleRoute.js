@@ -32,12 +32,29 @@ router.get('/', async (req, res, next) => {
             avis,
             idCategorie
         }
-        console.log(data);
         await articleService.createArticle(data);
         res.status(200);
         res.json({
             status: 200,
             message: "articles inseré"
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: " Une erreur est survenu  au Niveau de serveur"
+        });
+    }
+});
+
+router.get('/:id', async (req, res, next) => {
+    try {
+        let id = req.params.id;
+        let article = await articleService.getArticleById(id);
+        res.status(200);
+        res.json({
+            status: 200,
+            data: article,
+            message: ""
         })
 
     } catch (error) {
