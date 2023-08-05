@@ -6,7 +6,7 @@ const getArticles = async (idCateg) => {
         if (idCateg) {
             articles = await Article.find({
                 categorieId: idCateg
-            });
+            }).populate('avis');
         } else {
             articles = await Article.find();
             console.log(articles);

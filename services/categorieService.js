@@ -15,7 +15,7 @@ const getById = async (idCateg) => {
     const categorie = await Categorie.findById(idCateg);
     return categorie;
   } catch (error) {
-    console.error('Erreur lors de la récupération des catégories :', error);
+    console.error('Erreur lors de la récupération de la catégorie :', error);
     throw error;
   }
 }
