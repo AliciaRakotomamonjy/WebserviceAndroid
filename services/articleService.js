@@ -1,13 +1,16 @@
 const Article = require('../models/Article')
 
-const getArticles = async (idCateg) => {
+const getArticles = async (idCateg, titreArticle) => {
     try {
         let articles;
-        if (idCateg) {
-            articles = await Article.find({
-                categorieId: idCateg
-            }).populate('avis');
-        } else {
+        let where = {};
+
+        idCateg ? where.categorieId = idCatge : null;
+        titreArticle ? where.titre = new RegExp(titreArticle, "i") : null;
+        if (idCateg || titreArticle) {
+            articles = await Article.find(where).populate('avis');
+        }
+        else {
             articles = await Article.find();
             console.log(articles);
         }
@@ -28,6 +31,21 @@ const getArticleById = async (idArticle) => {
 }
 
 
+const getArticlesByTitre = async (titre) => {
+    try {
+        let articles;
+        articles = await Article.find({
+            titre: titre
+        }).populate('avis');
+        return articles;
+    } catch (error) {
+        console.error('Erreur lors de la récupération des articles :', error);
+        throw error;
+    }
+}
+
+
+
 const createArticle = async (data) => {
     try {
         const newArticle = new Article(data);
@@ -43,4 +61,5 @@ module.exports = {
     getArticles,
     getArticleById,
     createArticle,
+    getArticlesByTitre
 }

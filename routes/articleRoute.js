@@ -6,13 +6,13 @@ const categorieService = require('../services/categorieService')
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
     try {
-        let { categorieId } = req.body;
-        var articles = await articleService.getArticles(categorieId);
+        let { categorieId, titre } = req.body;
+        var articles = await articleService.getArticles(categorieId, titre);
         res.status(200);
         res.json({
             status: 200,
             data: articles,
-            message: ""
+            message: "liste d'articles"
         })
 
     } catch (error) {
