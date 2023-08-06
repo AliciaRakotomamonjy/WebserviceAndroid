@@ -5,6 +5,10 @@ const categorieSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  icone: {
+    type: String,
+    required: true
+  }
 },{collection: 'categorie'});
 
 const Categorie = mongoose.model('categorie', categorieSchema);
