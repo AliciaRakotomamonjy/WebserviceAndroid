@@ -19,7 +19,34 @@ const createAvis = async (data, idArticle) => {
     }
 }
 
+const updateAvis = async (id, note, comms, images) => {
+    try {
+        let updateColumn = {};
+        note ? updateColumn.note = note : null;
+        comms ? updateColumn.commentaire = comms : null;
+        images ? updateColumn.images = images : null;
+        await Avis.findOneAndUpdate(
+            { id },
+            updateColumn,
+            { new: true }
+        );
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+const deleteAvis = async (id) => {
+    try {
+        await Avis.findByIdAndDelete(id);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
 
 module.exports = {
-    createAvis
+    createAvis,
+    updateAvis,
+    deleteAvis
 }
