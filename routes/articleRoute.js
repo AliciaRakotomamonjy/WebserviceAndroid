@@ -22,7 +22,8 @@ router.get('/', async (req, res, next) => {
     }
 }).post('/', async (req, res, next) => {
     try {
-        let { titre, description, images, videos, datecreation, avis, idCategorie } = req.body;
+        let { titre, description, images, videos, avis, idCategorie } = req.body;
+        let datecreation = new Date();
         let data = {
             titre,
             description,
