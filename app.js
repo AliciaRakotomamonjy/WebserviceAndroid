@@ -10,6 +10,7 @@ var categorieRouter = require('./routes/categorieRoute');
 var deviceTokenRouter = require('./routes/deviceTokenRoute');
 var notificationRouter = require('./routes/notificationRoute');
 var articleRouter = require('./routes/articleRoute');
+var avisRouter = require('./routes/avisRoute');
 var app = express();
 require('./dbconnection/db');
 require('./notification/notificationAuth');
@@ -26,6 +27,7 @@ app.use('/api/categories', categorieRouter);
 app.use('/api/deviceTokens', deviceTokenRouter);
 app.use('/api/notifications', notificationRouter);
 app.use('/api/articles', articleRouter);
+app.use('/api/avis', avisRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
