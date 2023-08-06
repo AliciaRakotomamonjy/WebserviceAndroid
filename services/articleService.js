@@ -44,8 +44,6 @@ const getArticlesByTitre = async (titre) => {
     }
 }
 
-
-
 const createArticle = async (data) => {
     try {
         const newArticle = new Article(data);
@@ -57,9 +55,19 @@ const createArticle = async (data) => {
     }
 }
 
+const deleteArticle = async (id) => {
+    try {
+        await Article.findByIdAndDelete(id);
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 module.exports = {
     getArticles,
     getArticleById,
     createArticle,
-    getArticlesByTitre
+    getArticlesByTitre,
+    deleteArticle
 }
