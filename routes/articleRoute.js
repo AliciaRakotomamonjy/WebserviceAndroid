@@ -5,7 +5,7 @@ const articleService = require('../services/articleService')
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
     try {
-        let { categorieId, titre } = req.body;
+        let { categorieId, titre } = req.query
         var articles = await articleService.getArticles(categorieId, titre);
         res.status(200);
         res.json({
@@ -19,7 +19,9 @@ router.get('/', async (req, res, next) => {
             message: " Une erreur est survenu  au Niveau de serveur"
         });
     }
-}).post('/', async (req, res, next) => {
+});
+
+router.post('/', async (req, res, next) => {
     try {
         let { titre, description, images, videos, avis, idCategorie } = req.body;
         let datecreation = new Date();
@@ -62,7 +64,9 @@ router.get('/:id', async (req, res, next) => {
             message: " Une erreur est survenu  au Niveau de serveur"
         });
     }
-}).delete('/:id', async (req, res, next) => {
+})
+
+router.delete('/:id', async (req, res, next) => {
     try {
         let id = req.params.id;
         await articleService.deleteArticle(id);

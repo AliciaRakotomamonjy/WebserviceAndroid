@@ -1,16 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const favorisService = require('../services/favorisService');
+const { extractColumnFromJson } = require('../utils/Util');
 
 
 router.get('/', async (req, res, next) => {
     try {
-        let { idUser } = req.body;
-        var list = await favorisService.getMyFavori(idUser);
+        let { idUser } = req.query;
+        let liste = await favorisService.getMyFavori(idUser);
+        liste = extractColumnFromJson(liste,"articleId");
         res.status(200);
         res.json({
             status: 200,
-            data: list,
+            data: liste,
             message: "liste des favoris"
         })
     } catch (error) {
